@@ -4,6 +4,9 @@ $(function() {
     var lang = [
         "en",
         "bn",
+        "hi",
+        "ar",
+        
     ];
     
     // Main Elements
