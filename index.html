@@ -1,126 +1,293 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    <title>Translator</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+    <title>Translator</title>
 
-    <!-- Imports -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> 
-    <link href="styles.css" rel="stylesheet">
-    <script type="script" src="script.js"></script>
+    <!-- Google Fonts for Hindi and English -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- SolaimanLipi Font for Bangla (Downloadable for Web Use) -->
+    <link href="https://cdn.jsdelivr.net/gh/solaiman/solaiman-lipi-webfont/solaiman-lipi.css" rel="stylesheet" type="text/css">
+
+    <!-- Font Import for Arabic, Usmania -->
+    <link href="https://fonts.googleapis.com/css2?family=Usmania&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        /* Apply default font */
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #f9f9f9;
+            color: #444;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Apply styles for different languages */
+        .bangla {
+            font-family: 'SolaimanLipi', sans-serif;
+        }
+
+        .english {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hindi {
+            font-family: 'Mukta', sans-serif;
+        }
+
+        .arabic {
+            font-family: 'Usmania', sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            background-color: #fff;
+            margin-top: 50px;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Updated Header with Font Awesome Translator Logo */
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #4c4c6c;
+            margin-bottom: 30px;
+        }
+
+        h1 i {
+            margin-right: 10px;
+            font-size: 3rem;
+            color: #007bff;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .select {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .select select {
+            width: 48%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            background-color: #fafafa;
+            transition: border-color 0.3s ease;
+        }
+
+        .select select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .textarea {
+            margin-top: 20px;
+        }
+
+        .textarea textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            height: 120px;
+            background-color: #fafafa;
+            resize: none;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .textarea textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .main button {
+            width: 48%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #translate {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #translate i {
+            margin-right: 8px;
+        }
+
+        #translate:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        #clear {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #clear:hover {
+            background-color: #e53935;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Custom animation for icon */
+        .translate-icon {
+            font-size: 4rem;
+            color: #007bff;
+            animation: bounce 1s infinite alternate;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
+
     <div class="container">
-        <div class="nav">
-            Translator
+        <!-- Updated Header with Translator Logo -->
+        <h1><i class="fas fa-language"></i> Translator</h1>
+
+        <div class="select">
+            <select id="lang1"></select>
+            <select id="lang2"></select>
         </div>
-        <div class="info">
-            <h3 id="title"></h3>
-            <p id="sub"></p>
-            <div id="info">
-                
-            </div>
+
+        <div class="textarea">
+            <textarea id="user" placeholder="Enter text to translate..."></textarea>
+            <textarea id="output" placeholder="Translated text will appear here..." readonly></textarea>
         </div>
-        <div class="language" align="center">
-            <div class="select">
-                <select id="lang1"></select>
-                <select id="lang2"></select>
-            </div>
-            <div class="textarea">
-                <textarea id="user"></textarea>
-                <textarea id="output" readonly></textarea>
-            </div>
+
+        <div class="main text-center">
+            <button id="translate"><i class="fas fa-arrow-right"></i> Translate</button>
+            <button id="clear"><i class="fas fa-eraser"></i> Clear</button>
         </div>
-        <div class="main" align="center">
-            <button id="translate">Translate</button>
-            <button id="clear">Clear</button>
-        </div>
+
         <div class="footer">
-            Created By <a href="https://github.com/AnisurRahmanJU" target="blank"> Md. Anisur Rahman</a>
+            Created By <a href="https://github.com/AnisurRahmanJU" target="_blank">Md. Anisur Rahman</a>
         </div>
     </div>
-<script>
-$(function() {
-    // Supported Languages
-    var lang = [
-        "en",
-        "bn",
-        "hi",
-        "ar",
-        
-    ];
-    
-    // Main Elements
-    var elm = {
-        "lang": $("#lang1, #lang2"),
-        "user": $("#lang1"),
-        "output": $("#lang2"),
-        "userInput": $("#user"),
-        "langOutput": $("#output")
-    }
-    
-    // Importing Options
-    for (let i in lang) {
-        elm.lang.append(
-            "<option value='" +
-            lang[i] +
-            "'>" +
-            lang[i] +
-            "</option>"
-        );
-    }
-    
-    // Google Translate API
-    function translate() {
-    
-        // Formatting Text for URL
-        var format = elm
-            .userInput
-            .val()
-            .replace(/ /g , '%20');
-    
-        // Calling JSON
-        $.getJSON(
-           "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + elm.user.val() + "&tl=" + elm.output.val() + "&dt=t&dt=t&q=" + format,
-            function(JSON) {
-                var convert =
-                    JSON.toString();
-                var temp =
-                    convert.split(",");
-                
-                
-                elm.langOutput.val(temp[0]);
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        $(function() {
+            // Supported Languages
+            var lang = ["en", "bn", "hi", "ar"];
+
+            // Main Elements
+            var elm = {
+                "lang": $("#lang1, #lang2"),
+                "user": $("#lang1"),
+                "output": $("#lang2"),
+                "userInput": $("#user"),
+                "langOutput": $("#output")
             }
-        );
-    }
-    
-    // Interactive Elements
-    $("#translate").on("click", function() {
-        translate();
-    });
-    
-    $("#clear").on("click", function() {
-        elm.userInput.val(null);
-        elm.langOutput.val(null);
-    });
-    
-    setInterval(function() {
-        $("#from").text(
-            $("#lang1").val()
-        );
-        
-        $("#to").text(
-            $("#lang2").val()
-        );
-    }, 10);
-});
-        
-</script>
+
+            // Importing Options
+            lang.forEach(function(language) {
+                elm.lang.append("<option value='" + language + "'>" + language.toUpperCase() + "</option>");
+            });
+
+            // Function to dynamically set font
+            function setFontForLanguage(langCode) {
+                switch(langCode) {
+                    case 'bn': 
+                        elm.userInput.addClass('bangla');
+                        elm.langOutput.addClass('bangla');
+                        break;
+                    case 'hi': 
+                        elm.userInput.addClass('hindi');
+                        elm.langOutput.addClass('hindi');
+                        break;
+                    case 'ar': 
+                        elm.userInput.addClass('arabic');
+                        elm.langOutput.addClass('arabic');
+                        break;
+                    case 'en':
+                    default:
+                        elm.userInput.addClass('english');
+                        elm.langOutput.addClass('english');
+                        break;
+                }
+            }
+
+            // Google Translate API
+            function translate() {
+                // Formatting Text for URL
+                var format = elm.userInput.val().replace(/ /g, '%20');
+
+                // Calling JSON
+                $.getJSON(
+                    "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + elm.user.val() + "&tl=" + elm.output.val() + "&dt=t&q=" + format,
+                    function(response) {
+                        var translatedText = response[0][0][0];
+                        elm.langOutput.val(translatedText);
+                    }
+                );
+            }
+
+            // Interactive Elements
+            $("#translate").on("click", function() {
+                setFontForLanguage(elm.user.val());
+                translate();
+            });
+
+            $("#clear").on("click", function() {
+                elm.userInput.val('');
+                elm.langOutput.val('');
+                elm.userInput.removeClass('bangla hindi arabic english');
+                elm.langOutput.removeClass('bangla hindi arabic english');
+            });
+        });
+    </script>
+
 </body>
 </html>
