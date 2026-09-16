@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Translator - Anis Spoken English Lab</title>
+<title>Anis Spoken English Lab — Translator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
     background-image:url('Translator.png');
     background-size:cover;
     background-position:center;
-    border-radius:15px;
+    border-radius:0;
     overflow:visible;
     container-type:inline-size;
     box-shadow:0 10px 40px rgba(0,0,0,0.18);
@@ -74,8 +74,7 @@
   .field-patch textarea{
     position:absolute; inset:0;
     width:100%; height:100%;
-    border:none; 
-    background:transparent;
+    border:none; background:transparent;
     resize:none;
     padding:2.6cqw 3cqw;
     font-family:'Hind Siliguri','Baloo 2',sans-serif;
@@ -113,11 +112,20 @@
   }
   .btn-hit.translate{left:5.22%; width:43.9%;}
   .btn-hit.clear{left:50.87%; width:43.9%;}
+
+  /* ---- clickable header logo → website link ---- */
+  .brand-link{
+    position:absolute;
+    left:11.96%; top:1.51%;
+    width:63.48%; height:15.95%;
+    display:block;
+  }
 </style>
 </head>
 <body>
 
   <div class="poster-stage">
+    <a class="brand-link" href="https://anispokenenglish.wordpress.com" target="_blank" rel="noopener" title="Anis Spoken English Lab website"></a>
     <div class="card-hit" id="cardHit">
 
       <div class="lang left">
